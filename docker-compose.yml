@@ -31,11 +31,11 @@ services:
       - './services/users:/usr/src/app'
       - './services/users/package.json:/usr/src/package.json'
     ports:
-      - '3000:3000' # expose ports - HOST:CONTAINER
+      - '3002:3000' # expose ports - HOST:CONTAINER
     environment:
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
-      - NODE_ENV=${NODE_ENV}
+      - NODE_ENV=development
       - TOKEN_SECRET=changeme
     depends_on:
       users-db:
@@ -54,7 +54,7 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:postgres@movies-db:5432/movies_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@movies-db:5432/movies_test
-      - NODE_ENV=${NODE_ENV}
+      - NODE_ENV=development
       - TOKEN_SECRET=changeme
     depends_on:
       movies-db:
@@ -74,7 +74,7 @@ services:
     ports:
       - '3007:3006' # expose ports - HOST:CONTAINER
     environment:
-      - NODE_ENV=${NODE_ENV}
+      - NODE_ENV=development
     depends_on:
       users-service:
         condition: service_started
@@ -93,7 +93,7 @@ services:
     ports:
       - '3003:3001' # expose ports - HOST:CONTAINER
     environment:
-      - NODE_ENV=${NODE_ENV}
+      - NODE_ENV=development
     depends_on:
       users-service:
         condition: service_started
